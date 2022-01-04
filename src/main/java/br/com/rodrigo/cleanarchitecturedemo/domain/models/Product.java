@@ -16,7 +16,7 @@ public class Product {
     private Integer qtd;
     private BigDecimal value;
     @Setter
-    private boolean isActive;
+    private Boolean isActive;
     @Setter
     private LocalDateTime createdIn;
     @Setter

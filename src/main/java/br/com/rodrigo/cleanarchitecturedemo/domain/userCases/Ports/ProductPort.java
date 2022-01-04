@@ -13,8 +13,6 @@ public interface ProductPort {
 
     List<Product> findAll();
 
-    void inactivate(Long id);
-
-    void activated(Long id);
+    boolean productExists(Long id);
 
 }
