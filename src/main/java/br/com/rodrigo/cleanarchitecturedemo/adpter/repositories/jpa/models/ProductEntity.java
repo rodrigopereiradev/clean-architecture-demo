@@ -25,6 +25,12 @@ public class ProductEntity {
     @Column(name = "NAME")
     private String name;
 
+    @Column(name = "DESCRIPTION")
+    private String description;
+
+    @Column(name = "BRAND")
+    private String brand;
+
     @Column(name = "QUANTITY")
     private Integer quantity;
 

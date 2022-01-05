@@ -9,6 +9,8 @@ public class ProductMapper {
         return ProductEntity.builder()
                 .id(product.getId())
                 .name(product.getName())
+                .description(product.getDescription())
+                .brand(product.getBrand())
                 .quantity(product.getQuantity())
                 .value(product.getValue())
                 .isActive(product.getIsActive())
