@@ -13,7 +13,7 @@ public class Product {
 
     private Long id;
     private String name;
-    private Integer qtd;
+    private Integer quantity;
     private BigDecimal value;
     @Setter
     private Boolean isActive;

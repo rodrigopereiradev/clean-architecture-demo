@@ -20,7 +20,6 @@ public class ProductUserCase {
         port.save(product);
     }
 
-
     public void update(Product product) {
         if (!productExists(product.getId()))
             throw new ProductException("Product not found to be updated.");
