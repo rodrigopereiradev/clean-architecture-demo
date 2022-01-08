@@ -1,4 +1,4 @@
-package br.com.rodrigo.cleanarchitecturedemo.adpter.repositories.jpa.models;
+package br.com.rodrigo.cleanarchitecturedemo.adpter.models.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

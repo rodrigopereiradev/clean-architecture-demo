@@ -3,6 +3,7 @@ package br.com.rodrigo.cleanarchitecturedemo.domain.userCases;
 import br.com.rodrigo.cleanarchitecturedemo.domain.exceptions.ProductException;
 import br.com.rodrigo.cleanarchitecturedemo.domain.models.Product;
 import br.com.rodrigo.cleanarchitecturedemo.domain.userCases.Ports.ProductPort;
+import br.com.rodrigo.cleanarchitecturedemo.domain.userCases.interfaces.IProductUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,15 +12,18 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ProductUseCase {
+public class ProductUseCase implements IProductUseCase {
 
     private final ProductPort port;
 
+    @Override
     public void create(Product product) {
         product.setCreatedIn(LocalDateTime.now());
+        product.setIsActive(Boolean.FALSE);
         port.save(product);
     }
 
+    @Override
     public void update(Product product) {
         if (!productExists(product.getId()))
             throw new ProductException("Product not found to be updated.");
@@ -28,6 +32,7 @@ public class ProductUseCase {
         port.save(product);
     }
 
+    @Override
     public Product findById(Long id) {
         var product = port.findById(id);
 
@@ -37,10 +42,12 @@ public class ProductUseCase {
         return product.get();
     }
 
+    @Override
     public boolean productExists(Long id) {
         return port.productExists(id);
     }
 
+    @Override
     public void activate(Long id) {
         var product = findById(id);
         product.setIsActive(Boolean.TRUE);
@@ -48,6 +55,7 @@ public class ProductUseCase {
         port.save(product);
     }
 
+    @Override
     public void inactivate(Long id) {
         var product = findById(id);
         product.setIsActive(Boolean.FALSE);
@@ -55,10 +63,12 @@ public class ProductUseCase {
         port.save(product);
     }
 
+    @Override
     public List<Product> findAll() {
         return port.findAll();
     }
 
+    @Override
     public void increases(Long id, Integer quantityAdditional) {
         var product = findById(id);
         product.increasesQuantity(quantityAdditional);
@@ -66,6 +76,7 @@ public class ProductUseCase {
         port.save(product);
     }
 
+    @Override
     public void decreases(Long id, Integer quantityDecreased) {
         var product = findById(id);
         product.decreasesQuantity(quantityDecreased);

@@ -34,6 +34,12 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Validation-->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+        </dependency>
+
         <!--DataBase Dependencies-->
         <dependency>
             <groupId>com.h2database</groupId>
