@@ -24,4 +24,11 @@ public class Product {
     @Setter
     private LocalDateTime updatedIn;
 
+    public void increasesQuantity(Integer quantityAdditional) {
+        this.quantity += quantityAdditional;
+    }
+
+    public void decreasesQuantity(Integer quantityDecreased) {
+        this.quantity -= quantityDecreased;
+    }
 }

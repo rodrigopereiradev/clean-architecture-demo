@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ProductUserCase {
+public class ProductUseCase {
 
     private final ProductPort port;
 
@@ -57,5 +57,19 @@ public class ProductUserCase {
 
     public List<Product> findAll() {
         return port.findAll();
+    }
+
+    public void increases(Long id, Integer quantityAdditional) {
+        var product = findById(id);
+        product.increasesQuantity(quantityAdditional);
+        product.setUpdatedIn(LocalDateTime.now());
+        port.save(product);
+    }
+
+    public void decreases(Long id, Integer quantityDecreased) {
+        var product = findById(id);
+        product.decreasesQuantity(quantityDecreased);
+        product.setUpdatedIn(LocalDateTime.now());
+        port.save(product);
     }
 }

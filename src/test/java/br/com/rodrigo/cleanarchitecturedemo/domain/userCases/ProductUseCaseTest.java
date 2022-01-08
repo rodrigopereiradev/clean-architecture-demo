@@ -19,25 +19,25 @@ import static org.mockito.Mockito.when;
 
 
 @ExtendWith(MockitoExtension.class)
-class ProductUserCaseTest {
+class ProductUseCaseTest {
 
     @Mock
     private ProductPort port;
 
     @InjectMocks
-    private ProductUserCase userCase;
+    private ProductUseCase useCase;
 
     @Test
     void shouldCallSaveMethodFromPortWhenCreatingProduct() {
         var product = Product.builder().build();
-        userCase.create(product);
+        useCase.create(product);
         verify(port).save(product);
     }
 
     @Test
     void shouldSetCreationDateOnProductWhenItIsCreated() {
         var product = Product.builder().build();
-        userCase.create(product);
+        useCase.create(product);
         assertNotNull(product.getCreatedIn());
     }
 
@@ -45,7 +45,7 @@ class ProductUserCaseTest {
     void shouldCallSaveMethodFromPortWhenUpdatingProduct() {
         var product = Product.builder().id(1L).build();
         when(port.productExists(1L)).thenReturn(true);
-        userCase.update(product);
+        useCase.update(product);
         verify(port).save(product);
     }
 
@@ -53,7 +53,7 @@ class ProductUserCaseTest {
     void shouldSetUpdateDateOnProductWhenUpdatingProduct() {
         var product = Product.builder().id(1L).build();
         when(port.productExists(1L)).thenReturn(true);
-        userCase.update(product);
+        useCase.update(product);
         assertNotNull(product.getUpdatedIn());
     }
 
@@ -61,13 +61,13 @@ class ProductUserCaseTest {
     void shouldThrowExceptionWhenProductDoesNotExistsWhenUpdating() {
         var product = Product.builder().id(1L).build();
         when(port.productExists(1L)).thenReturn(false);
-        assertThrows(ProductException.class, () -> userCase.update(product));
+        assertThrows(ProductException.class, () -> useCase.update(product));
     }
 
     @Test
     void shouldReturnTrueWheTheProductAlreadyExists() {
         when(port.productExists(1L)).thenReturn(true);
-        boolean productExists = userCase.productExists(1L);
+        boolean productExists = useCase.productExists(1L);
         assertTrue(productExists);
     }
 
@@ -75,21 +75,21 @@ class ProductUserCaseTest {
     void shouldReturnProductThatAlreadyExist() {
         var product = Product.builder().id(1L).build();
         when(port.findById(1L)).thenReturn(Optional.of(product));
-        var productFound = userCase.findById(1L);
+        var productFound = useCase.findById(1L);
         assertEquals(productFound.getId(), 1L);
     }
 
     @Test
     void shouldThrowExceptionWhenProductDoesNotExist() {
         when(port.findById(1L)).thenReturn(Optional.empty());
-        assertThrows(ProductException.class,() -> userCase.findById(1L));
+        assertThrows(ProductException.class,() -> useCase.findById(1L));
     }
 
     @Test
     void  shouldSetTrueToIsActiveWhenActivatingProduct() {
         var product = Product.builder().isActive(Boolean.FALSE).build();
         when(port.findById(1L)).thenReturn(Optional.of(product));
-        userCase.activate(1L);
+        useCase.activate(1L);
         assertTrue(product.getIsActive());
     }
 
@@ -97,7 +97,7 @@ class ProductUserCaseTest {
     void shouldCallMethodSaveFromPortWhenActivatingProduct() {
         var product = Product.builder().isActive(Boolean.FALSE).build();
         when(port.findById(1L)).thenReturn(Optional.of(product));
-        userCase.activate(1L);
+        useCase.activate(1L);
         verify(port).save(product);
     }
 
@@ -105,7 +105,7 @@ class ProductUserCaseTest {
     void shouldSetUpdateDateWhenActivatingProduct() {
         var product = Product.builder().isActive(Boolean.FALSE).build();
         when(port.findById(1L)).thenReturn(Optional.of(product));
-        userCase.activate(1L);
+        useCase.activate(1L);
         assertNotNull(product.getUpdatedIn());
     }
 
@@ -113,7 +113,7 @@ class ProductUserCaseTest {
     void  shouldSetFalseToIsActiveWhenInactivatingProduct() {
         var product = Product.builder().isActive(Boolean.TRUE).build();
         when(port.findById(1L)).thenReturn(Optional.of(product));
-        userCase.inactivate(1L);
+        useCase.inactivate(1L);
         assertFalse(product.getIsActive());
     }
 
@@ -121,7 +121,7 @@ class ProductUserCaseTest {
     void shouldCallMethodSaveFromPortWhenInactivatingProduct() {
         var product = Product.builder().isActive(Boolean.FALSE).build();
         when(port.findById(1L)).thenReturn(Optional.of(product));
-        userCase.inactivate(1L);
+        useCase.inactivate(1L);
         verify(port).save(product);
     }
 
@@ -129,7 +129,7 @@ class ProductUserCaseTest {
     void shouldSetUpdateDateWhenInactivatingProduct() {
         var product = Product.builder().isActive(Boolean.FALSE).build();
         when(port.findById(1L)).thenReturn(Optional.of(product));
-        userCase.inactivate(1L);
+        useCase.inactivate(1L);
         assertNotNull(product.getUpdatedIn());
     }
 
@@ -137,7 +137,7 @@ class ProductUserCaseTest {
     void shouldBringAtLeastOneProductWhenFindAll() {
         var product = Product.builder().build();
         when(port.findAll()).thenReturn(Collections.singletonList(product));
-        var products = userCase.findAll();
+        var products = useCase.findAll();
         assertFalse(products.isEmpty());
     }
 
@@ -145,8 +145,24 @@ class ProductUserCaseTest {
     void shouldBringEmptyListWhenProductsNotFound() {
         var product = Product.builder().build();
         when(port.findAll()).thenReturn(new ArrayList<>());
-        var products = userCase.findAll();
+        var products = useCase.findAll();
         assertTrue(products.isEmpty());
+    }
+
+    @Test
+    void shouldIncreasesProducts() {
+        var product = Product.builder().id(1L).quantity(100).build();
+        when(port.findById(1L)).thenReturn(Optional.of(product));
+        useCase.increases(1L, 50);
+        assertEquals(150, product.getQuantity());
+    }
+
+    @Test
+    void shouldDecreasesProducts() {
+        var product = Product.builder().id(1L).quantity(150).build();
+        when(port.findById(1L)).thenReturn(Optional.of(product));
+        useCase.decreases(1L, 50);
+        assertEquals(100, product.getQuantity());
     }
 
 }
