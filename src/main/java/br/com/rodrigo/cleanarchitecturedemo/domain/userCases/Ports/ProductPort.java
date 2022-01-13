@@ -9,7 +9,7 @@ public interface ProductPort {
 
     void save(Product product);
 
-    Optional<Product> findById(Long id);
+    Product findById(Long id);
 
     List<Product> findAll();
 

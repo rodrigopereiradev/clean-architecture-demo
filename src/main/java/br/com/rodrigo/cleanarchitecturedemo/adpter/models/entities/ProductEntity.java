@@ -1,15 +1,13 @@
 package br.com.rodrigo.cleanarchitecturedemo.adpter.models.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Builder
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString

@@ -5,6 +5,8 @@ import br.com.rodrigo.cleanarchitecturedemo.adpter.models.entities.ProductEntity
 import br.com.rodrigo.cleanarchitecturedemo.domain.models.Product;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 
 @Component
 public class ProductMapper {
@@ -34,4 +36,17 @@ public class ProductMapper {
                 .build();
     }
 
+    public Product fromEntity(ProductEntity productEntity) {
+        return Product.builder()
+                .id(productEntity.getId())
+                .name(productEntity.getName())
+                .description(productEntity.getDescription())
+                .Brand(productEntity.getBrand())
+                .quantity(productEntity.getQuantity())
+                .value(productEntity.getValue())
+                .isActive(productEntity.getIsActive())
+                .updatedIn(productEntity.getUpdatedIn())
+                .createdIn(productEntity.getCreatedIn())
+                .build();
+    }
 }

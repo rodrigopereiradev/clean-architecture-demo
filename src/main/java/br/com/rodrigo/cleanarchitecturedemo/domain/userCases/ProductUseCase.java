@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -36,10 +37,10 @@ public class ProductUseCase implements IProductUseCase {
     public Product findById(Long id) {
         var product = port.findById(id);
 
-        if (product.isEmpty())
+        if (Objects.isNull(product))
             throw new ProductException("Product not found.");
 
-        return product.get();
+        return product;
     }
 
     @Override
