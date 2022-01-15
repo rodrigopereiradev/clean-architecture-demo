@@ -1,15 +1,18 @@
-package br.com.rodrigo.cleanarchitecturedemo.domain.models;
+package br.com.rodrigo.cleanarchitecturedemo.adpter.models.dtos;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Builder
 @Getter
-public class Product {
+@AllArgsConstructor
+@NoArgsConstructor
+public class ProductResponseDTO {
 
     private Long id;
     private String name;
@@ -17,18 +20,7 @@ public class Product {
     private String brand;
     private Integer quantity;
     private BigDecimal value;
-    @Setter
     private Boolean isActive;
-    @Setter
     private LocalDateTime createdIn;
-    @Setter
     private LocalDateTime updatedIn;
-
-    public void increasesQuantity(Integer quantityAdditional) {
-        this.quantity += quantityAdditional;
-    }
-
-    public void decreasesQuantity(Integer quantityDecreased) {
-        this.quantity -= quantityDecreased;
-    }
 }

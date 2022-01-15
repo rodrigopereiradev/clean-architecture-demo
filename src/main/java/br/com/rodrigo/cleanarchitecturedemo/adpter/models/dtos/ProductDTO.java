@@ -12,8 +12,6 @@ import java.math.BigDecimal;
 @Builder
 public class ProductDTO {
 
-    private Long id;
-
     @NotBlank(message = "The product's name is mandatory.")
     @Size(max = 100, message = "The product's name should have a maximum of 100 characters")
     private String name;

@@ -3,7 +3,6 @@ package br.com.rodrigo.cleanarchitecturedemo.domain.userCases.Ports;
 import br.com.rodrigo.cleanarchitecturedemo.domain.models.Product;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ProductPort {
 

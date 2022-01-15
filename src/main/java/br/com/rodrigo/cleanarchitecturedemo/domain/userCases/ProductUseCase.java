@@ -26,9 +26,6 @@ public class ProductUseCase implements IProductUseCase {
 
     @Override
     public void update(Product product) {
-        if (!productExists(product.getId()))
-            throw new ProductException("Product not found to be updated.");
-
         product.setUpdatedIn(LocalDateTime.now());
         port.save(product);
     }
