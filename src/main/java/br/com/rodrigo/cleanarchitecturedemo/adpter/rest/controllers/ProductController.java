@@ -6,9 +6,9 @@ import br.com.rodrigo.cleanarchitecturedemo.adpter.models.dtos.ProductDTO;
 import br.com.rodrigo.cleanarchitecturedemo.domain.userCases.interfaces.IProductUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -22,7 +22,7 @@ public class ProductController {
     private final ProductMapper productMapper;
 
     @PostMapping
-    public ResponseEntity<Void> create(@Valid @RequestBody ProductDTO productDTO) {
+    public ResponseEntity<Void> create(@Validated @RequestBody ProductDTO productDTO) {
         var product = productMapper.fromDto(productDTO);
         useCase.create(product);
         return ResponseEntity.ok().build();
@@ -49,7 +49,7 @@ public class ProductController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Void> update(@Valid @RequestBody ProductDTO productDTO, @PathVariable Long id) {
+    public ResponseEntity<Void> update(@Validated @RequestBody ProductDTO productDTO, @PathVariable Long id) {
         var productDatabase = useCase.findById(id);
         var product = productMapper.fromDto(productDTO, productDatabase);
         useCase.update(product);
