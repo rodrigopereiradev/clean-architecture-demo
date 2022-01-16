@@ -41,11 +41,6 @@ public class ProductUseCase implements IProductUseCase {
     }
 
     @Override
-    public boolean productExists(Long id) {
-        return port.productExists(id);
-    }
-
-    @Override
     public void activate(Long id) {
         var product = findById(id);
         product.setIsActive(Boolean.TRUE);

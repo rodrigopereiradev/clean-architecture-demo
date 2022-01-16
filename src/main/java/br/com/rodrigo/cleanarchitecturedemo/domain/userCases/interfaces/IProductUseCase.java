@@ -11,8 +11,6 @@ public interface IProductUseCase {
 
     Product findById(Long id);
 
-    boolean productExists(Long id);
-
     void activate(Long id);
 
     void inactivate(Long id);

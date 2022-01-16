@@ -16,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-
 @ExtendWith(MockitoExtension.class)
 class ProductUseCaseTest {
 
@@ -43,7 +42,6 @@ class ProductUseCaseTest {
     @Test
     void shouldCallSaveMethodFromPortWhenUpdatingProduct() {
         var product = Product.builder().id(1L).build();
-        when(port.productExists(1L)).thenReturn(true);
         useCase.update(product);
         verify(port).save(product);
     }
@@ -51,23 +49,8 @@ class ProductUseCaseTest {
     @Test
     void shouldSetUpdateDateOnProductWhenUpdatingProduct() {
         var product = Product.builder().id(1L).build();
-        when(port.productExists(1L)).thenReturn(true);
         useCase.update(product);
         assertNotNull(product.getUpdatedIn());
-    }
-
-    @Test
-    void shouldThrowExceptionWhenProductDoesNotExistsWhenUpdating() {
-        var product = Product.builder().id(1L).build();
-        when(port.productExists(1L)).thenReturn(false);
-        assertThrows(ProductException.class, () -> useCase.update(product));
-    }
-
-    @Test
-    void shouldReturnTrueWheTheProductAlreadyExists() {
-        when(port.productExists(1L)).thenReturn(true);
-        boolean productExists = useCase.productExists(1L);
-        assertTrue(productExists);
     }
 
     @Test
@@ -75,7 +58,7 @@ class ProductUseCaseTest {
         var product = Product.builder().id(1L).build();
         when(port.findById(1L)).thenReturn(product);
         var productFound = useCase.findById(1L);
-        assertEquals(productFound.getId(), 1L);
+        assertEquals( 1L, productFound.getId());
     }
 
     @Test
