@@ -5,13 +5,11 @@ import br.com.rodrigo.cleanarchitecturedemo.domain.models.Product;
 import br.com.rodrigo.cleanarchitecturedemo.domain.userCases.Ports.ProductPort;
 import br.com.rodrigo.cleanarchitecturedemo.domain.userCases.interfaces.IProductUseCase;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
-@Service
 @RequiredArgsConstructor
 public class ProductUseCase implements IProductUseCase {
 
@@ -26,8 +24,9 @@ public class ProductUseCase implements IProductUseCase {
 
     @Override
     public void update(Product product) {
-        product.setUpdatedIn(LocalDateTime.now());
-        port.save(product);
+        var productExistent = findById(product.getId());
+        productExistent.updateProperties(product);
+        port.save(productExistent);
     }
 
     @Override

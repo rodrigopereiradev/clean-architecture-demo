@@ -31,4 +31,13 @@ public class Product {
     public void decreasesQuantity(Integer quantityDecreased) {
         this.quantity -= quantityDecreased;
     }
+
+    public void updateProperties(Product product) {
+        this.name = product.getName();
+        this.description = product.getDescription();
+        this.brand = product.getBrand();
+        this.quantity = product.getQuantity();
+        this.value = product.getValue();
+        this.updatedIn = LocalDateTime.now();
+    }
 }

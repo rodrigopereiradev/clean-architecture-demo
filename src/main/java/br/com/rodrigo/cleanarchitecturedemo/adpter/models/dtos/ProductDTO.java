@@ -2,6 +2,7 @@ package br.com.rodrigo.cleanarchitecturedemo.adpter.models.dtos;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -11,6 +12,9 @@ import java.math.BigDecimal;
 @Getter
 @Builder
 public class ProductDTO {
+
+    @Setter
+    private Long id;
 
     @NotBlank(message = "The product's name is mandatory.")
     @Size(max = 100, message = "The product's name should have a maximum of 100 characters")

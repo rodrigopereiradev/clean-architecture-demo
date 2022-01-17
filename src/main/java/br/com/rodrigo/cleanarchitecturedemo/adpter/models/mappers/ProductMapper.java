@@ -33,20 +33,6 @@ public class ProductMapper {
                 .build();
     }
 
-    public Product fromDto(ProductDTO productDTO, Product product) {
-        return Product.builder()
-                .id(product.getId())
-                .name(productDTO.getName())
-                .description(productDTO.getDescription())
-                .brand(productDTO.getBrand())
-                .quantity(productDTO.getQuantity())
-                .value(productDTO.getValue())
-                .isActive(product.getIsActive())
-                .createdIn(product.getCreatedIn())
-                .updatedIn(product.getUpdatedIn())
-                .build();
-    }
-
     public Product fromEntity(ProductEntity productEntity) {
         return Product.builder()
                 .id(productEntity.getId())

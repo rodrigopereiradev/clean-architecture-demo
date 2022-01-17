@@ -42,6 +42,7 @@ class ProductUseCaseTest {
     @Test
     void shouldCallSaveMethodFromPortWhenUpdatingProduct() {
         var product = Product.builder().id(1L).build();
+        when(port.findById(1L)).thenReturn(product);
         useCase.update(product);
         verify(port).save(product);
     }
@@ -49,6 +50,7 @@ class ProductUseCaseTest {
     @Test
     void shouldSetUpdateDateOnProductWhenUpdatingProduct() {
         var product = Product.builder().id(1L).build();
+        when(port.findById(1L)).thenReturn(product);
         useCase.update(product);
         assertNotNull(product.getUpdatedIn());
     }
@@ -145,6 +147,13 @@ class ProductUseCaseTest {
         when(port.findById(1L)).thenReturn(product);
         useCase.decreases(1L, 50);
         assertEquals(100, product.getQuantity());
+    }
+
+    @Test
+    void shouldThrowExceptionWhenProductDoesNotExistsWhenUpdating() {
+        var product = Product.builder().id(1L).build();
+        when(port.findById(1L)).thenReturn(null);
+        assertThrows(ProductException.class, () -> useCase.update(product));
     }
 
 }

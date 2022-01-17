@@ -50,8 +50,8 @@ public class ProductController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<Void> update(@Validated @RequestBody ProductDTO productDTO, @PathVariable Long id) {
-        var productDatabase = useCase.findById(id);
-        var product = productMapper.fromDto(productDTO, productDatabase);
+        productDTO.setId(id);
+        var product = productMapper.fromDto(productDTO);
         useCase.update(product);
         return ResponseEntity.ok().build();
     }
