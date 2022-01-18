@@ -1,8 +1,8 @@
 package br.com.rodrigo.cleanarchitecturedemo.adpter.rest.controllers;
 
-import br.com.rodrigo.cleanarchitecturedemo.adpter.models.dtos.ProductResponseDTO;
-import br.com.rodrigo.cleanarchitecturedemo.adpter.models.mappers.ProductMapper;
-import br.com.rodrigo.cleanarchitecturedemo.adpter.models.dtos.ProductDTO;
+import br.com.rodrigo.cleanarchitecturedemo.adpter.dtos.ProductResponseDTO;
+import br.com.rodrigo.cleanarchitecturedemo.adpter.mappers.ProductMapper;
+import br.com.rodrigo.cleanarchitecturedemo.adpter.dtos.ProductDTO;
 import br.com.rodrigo.cleanarchitecturedemo.domain.userCases.interfaces.IProductUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +32,7 @@ public class ProductController {
     public ResponseEntity<List<ProductResponseDTO>> findAll() {
         var products = useCase.findAll();
         var productsDto = products.stream()
-                .map(productMapper::fromProduct)
+                .map(productMapper::fromProductToDTO)
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(productsDto);
@@ -45,7 +45,7 @@ public class ProductController {
 
         var product = useCase.findById(id);
 
-        return ResponseEntity.ok(productMapper.fromProduct(product));
+        return ResponseEntity.ok(productMapper.fromProductToDTO(product));
     }
 
     @PutMapping(value = "/{id}")

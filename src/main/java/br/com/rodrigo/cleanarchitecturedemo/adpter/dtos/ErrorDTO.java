@@ -1,4 +1,4 @@
-package br.com.rodrigo.cleanarchitecturedemo.adpter.models.dtos;
+package br.com.rodrigo.cleanarchitecturedemo.adpter.dtos;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;

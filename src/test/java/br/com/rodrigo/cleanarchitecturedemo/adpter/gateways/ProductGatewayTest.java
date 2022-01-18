@@ -1,8 +1,8 @@
 package br.com.rodrigo.cleanarchitecturedemo.adpter.gateways;
 
 import br.com.rodrigo.cleanarchitecturedemo.adpter.jpa.repositories.ProductRepository;
-import br.com.rodrigo.cleanarchitecturedemo.adpter.models.entities.ProductEntity;
-import br.com.rodrigo.cleanarchitecturedemo.adpter.models.mappers.ProductMapper;
+import br.com.rodrigo.cleanarchitecturedemo.adpter.jpa.entities.ProductEntity;
+import br.com.rodrigo.cleanarchitecturedemo.adpter.mappers.ProductMapper;
 import br.com.rodrigo.cleanarchitecturedemo.domain.models.Product;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

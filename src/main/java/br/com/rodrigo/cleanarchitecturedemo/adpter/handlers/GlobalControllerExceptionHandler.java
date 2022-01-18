@@ -1,6 +1,6 @@
-package br.com.rodrigo.cleanarchitecturedemo.adpter.hadlers;
+package br.com.rodrigo.cleanarchitecturedemo.adpter.handlers;
 
-import br.com.rodrigo.cleanarchitecturedemo.adpter.models.dtos.ErrorDTO;
+import br.com.rodrigo.cleanarchitecturedemo.adpter.dtos.ErrorDTO;
 import br.com.rodrigo.cleanarchitecturedemo.domain.exceptions.ProductException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

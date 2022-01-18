@@ -1,4 +1,4 @@
-package br.com.rodrigo.cleanarchitecturedemo.adpter.models.entities;
+package br.com.rodrigo.cleanarchitecturedemo.adpter.jpa.entities;
 
 import lombok.*;
 
