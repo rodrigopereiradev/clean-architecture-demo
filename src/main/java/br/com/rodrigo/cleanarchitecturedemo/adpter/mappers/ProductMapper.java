@@ -1,7 +1,7 @@
 package br.com.rodrigo.cleanarchitecturedemo.adpter.mappers;
 
-import br.com.rodrigo.cleanarchitecturedemo.adpter.dtos.ProductDTO;
-import br.com.rodrigo.cleanarchitecturedemo.adpter.dtos.ProductResponseDTO;
+import br.com.rodrigo.cleanarchitecturedemo.adpter.rest.dtos.ProductDTO;
+import br.com.rodrigo.cleanarchitecturedemo.adpter.rest.dtos.ProductResponseDTO;
 import br.com.rodrigo.cleanarchitecturedemo.adpter.jpa.entities.ProductEntity;
 import br.com.rodrigo.cleanarchitecturedemo.domain.models.Product;
 import org.springframework.stereotype.Component;

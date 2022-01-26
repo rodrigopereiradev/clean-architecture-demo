@@ -1,10 +1,11 @@
 package br.com.rodrigo.cleanarchitecturedemo.adpter.rest.controllers;
 
-import br.com.rodrigo.cleanarchitecturedemo.adpter.dtos.ProductResponseDTO;
+import br.com.rodrigo.cleanarchitecturedemo.adpter.rest.dtos.ProductResponseDTO;
 import br.com.rodrigo.cleanarchitecturedemo.adpter.mappers.ProductMapper;
-import br.com.rodrigo.cleanarchitecturedemo.adpter.dtos.ProductDTO;
+import br.com.rodrigo.cleanarchitecturedemo.adpter.rest.dtos.ProductDTO;
 import br.com.rodrigo.cleanarchitecturedemo.domain.userCases.interfaces.IProductUseCase;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -18,19 +19,19 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ProductController {
 
-    private final IProductUseCase useCase;
+    private final IProductUseCase productUseCase;
     private final ProductMapper productMapper;
 
     @PostMapping
     public ResponseEntity<Void> create(@Validated @RequestBody ProductDTO productDTO) {
         var product = productMapper.fromDto(productDTO);
-        useCase.create(product);
-        return ResponseEntity.ok().build();
+        productUseCase.create(product);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping
     public ResponseEntity<List<ProductResponseDTO>> findAll() {
-        var products = useCase.findAll();
+        var products = productUseCase.findAll();
         var productsDto = products.stream()
                 .map(productMapper::fromProductToDTO)
                 .collect(Collectors.toList());
@@ -43,7 +44,7 @@ public class ProductController {
         if (Objects.isNull(id))
             throw new IllegalArgumentException("The product id is mandatory.");
 
-        var product = useCase.findById(id);
+        var product = productUseCase.findById(id);
 
         return ResponseEntity.ok(productMapper.fromProductToDTO(product));
     }
@@ -52,35 +53,35 @@ public class ProductController {
     public ResponseEntity<Void> update(@Validated @RequestBody ProductDTO productDTO, @PathVariable Long id) {
         productDTO.setId(id);
         var product = productMapper.fromDto(productDTO);
-        useCase.update(product);
+        productUseCase.update(product);
         return ResponseEntity.ok().build();
     }
 
 
     @PatchMapping(value = "/{id}/activate")
     public ResponseEntity<Void> activate(@PathVariable Long id) {
-        useCase.activate(id);
+        productUseCase.activate(id);
 
         return ResponseEntity.ok().build();
     }
 
     @PatchMapping(value = "/{id}/inactivate")
     public ResponseEntity<Void> inactivate(@PathVariable Long id) {
-        useCase.inactivate(id);
+        productUseCase.inactivate(id);
 
         return ResponseEntity.ok().build();
     }
 
     @PatchMapping(value = "/{id}/increases/{quantity}")
     public ResponseEntity<Void> increases(@PathVariable Long id, @PathVariable Integer quantity) {
-        useCase.increases(id, quantity);
+        productUseCase.increases(id, quantity);
 
         return ResponseEntity.ok().build();
     }
 
     @PatchMapping(value = "/{id}/decreases/{quantity}")
     public ResponseEntity<Void> decreases(@PathVariable Long id, @PathVariable Integer quantity) {
-        useCase.decreases(id, quantity);
+        productUseCase.decreases(id, quantity);
 
         return ResponseEntity.ok().build();
     }

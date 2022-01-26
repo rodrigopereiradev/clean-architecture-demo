@@ -1,4 +1,4 @@
-package br.com.rodrigo.cleanarchitecturedemo.adpter.dtos;
+package br.com.rodrigo.cleanarchitecturedemo.adpter.rest.dtos;
 
 import lombok.Builder;
 import lombok.Getter;

@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ComponentScan(basePackageClasses = { CleanArchitectureDemoApplication.class })
-public class BeanConfigurations {
+public class BeansConfig {
 
     @Bean
     IProductUseCase productUseCase(ProductPort productPort) {
