@@ -10,10 +10,10 @@ import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
 @Getter
+@Setter
 @Builder
 public class ProductDTO {
 
-    @Setter
     private Long id;
 
     @NotBlank(message = "The product's name is mandatory.")
@@ -23,7 +23,7 @@ public class ProductDTO {
     @Size(max = 100, message = "The product's description should have a maximum of 250 characters")
     private String description;
 
-    @NotBlank(message = "The product's name is mandatory.")
+    @NotBlank(message = "The product's brand is mandatory.")
     @Size(max = 100, message = "The product's name should have a maximum of 100 characters")
     private String brand;
 
