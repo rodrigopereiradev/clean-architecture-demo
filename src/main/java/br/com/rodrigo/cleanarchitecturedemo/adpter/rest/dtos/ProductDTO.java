@@ -4,9 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
 @Getter
@@ -31,5 +29,7 @@ public class ProductDTO {
     private Integer quantity;
 
     @NotNull(message = "The product's value is mandatory.")
+    @DecimalMin(value = "0.0", message = "The product's value needs to be highest or equal 0.0")
+    @Digits(integer = 16, fraction = 2, message = "Value needs to be a decimal (17,2)")
     private BigDecimal value;
 }

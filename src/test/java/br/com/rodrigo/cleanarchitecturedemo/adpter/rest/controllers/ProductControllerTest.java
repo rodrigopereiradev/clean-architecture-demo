@@ -2,11 +2,8 @@ package br.com.rodrigo.cleanarchitecturedemo.adpter.rest.controllers;
 
 import br.com.rodrigo.cleanarchitecturedemo.adpter.rest.dtos.ProductDTO;
 import io.restassured.RestAssured;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
@@ -16,7 +13,6 @@ import java.math.BigDecimal;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
-@ExtendWith(MockitoExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ProductControllerTest {
 
@@ -145,16 +141,45 @@ class ProductControllerTest {
     }
 
     @Test
-    void shouldReturnOkWithMessageWhenCreatingProductWithNullValue() {
+    void shouldReturnBadRequestWithMessageWhenCreatingProductWithNegativeValue() {
         var product = getProductDTO();
-        product.setValue(null);
+        product.setValue(new BigDecimal("-1"));
 
         given().body(product)
                 .contentType("application/json")
                 .post()
                 .then()
                 .statusCode(HttpStatus.BAD_REQUEST.value())
-                .body("descriptions", hasItem("The product's value is mandatory."));
+                .body("descriptions", hasItem("The product's value needs to be highest or equal 0.0"));
+
+    }
+
+    @Test
+    void shouldReturnBadRequestWithMessageWhenCreatingProductWithValueWithMoreThanTwoDecimals() {
+        var product = getProductDTO();
+        product.setValue(new BigDecimal("1.003"));
+
+        given().body(product)
+                .contentType("application/json")
+                .post()
+                .then()
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .body("descriptions", hasItem("Value needs to be a decimal (17,2)"));
+
+    }
+
+    @Test
+    void shouldReturnBadRequestWithMessageWhenCreatingProductWithValueMoreThanSixteenIntegers() {
+        var product = getProductDTO();
+        product.setValue(new BigDecimal("12345678901234567.00"));
+
+        given().body(product)
+                .contentType("application/json")
+                .post()
+                .then()
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .body("descriptions", hasItem("Value needs to be a decimal (17,2)"));
+
     }
 
     @Test
