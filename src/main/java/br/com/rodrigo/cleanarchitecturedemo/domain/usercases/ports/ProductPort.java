@@ -1,4 +1,4 @@
-package br.com.rodrigo.cleanarchitecturedemo.domain.userCases.Ports;
+package br.com.rodrigo.cleanarchitecturedemo.domain.usercases.ports;
 
 import br.com.rodrigo.cleanarchitecturedemo.domain.models.Product;
 

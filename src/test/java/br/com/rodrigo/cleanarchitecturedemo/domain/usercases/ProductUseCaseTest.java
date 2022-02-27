@@ -1,8 +1,9 @@
-package br.com.rodrigo.cleanarchitecturedemo.domain.userCases;
+package br.com.rodrigo.cleanarchitecturedemo.domain.usercases;
 
 import br.com.rodrigo.cleanarchitecturedemo.domain.exceptions.ProductException;
 import br.com.rodrigo.cleanarchitecturedemo.domain.models.Product;
-import br.com.rodrigo.cleanarchitecturedemo.domain.userCases.Ports.ProductPort;
+import br.com.rodrigo.cleanarchitecturedemo.domain.usercases.implementations.ProductUseCase;
+import br.com.rodrigo.cleanarchitecturedemo.domain.usercases.ports.ProductPort;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

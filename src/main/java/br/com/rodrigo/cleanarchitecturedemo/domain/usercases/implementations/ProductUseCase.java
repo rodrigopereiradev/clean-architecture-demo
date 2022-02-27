@@ -1,9 +1,9 @@
-package br.com.rodrigo.cleanarchitecturedemo.domain.userCases;
+package br.com.rodrigo.cleanarchitecturedemo.domain.usercases.implementations;
 
 import br.com.rodrigo.cleanarchitecturedemo.domain.exceptions.ProductException;
 import br.com.rodrigo.cleanarchitecturedemo.domain.models.Product;
-import br.com.rodrigo.cleanarchitecturedemo.domain.userCases.Ports.ProductPort;
-import br.com.rodrigo.cleanarchitecturedemo.domain.userCases.interfaces.IProductUseCase;
+import br.com.rodrigo.cleanarchitecturedemo.domain.usercases.IProductUseCase;
+import br.com.rodrigo.cleanarchitecturedemo.domain.usercases.ports.ProductPort;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;

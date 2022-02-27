@@ -1,4 +1,4 @@
-package br.com.rodrigo.cleanarchitecturedemo.domain.userCases.interfaces;
+package br.com.rodrigo.cleanarchitecturedemo.domain.usercases;
 
 import br.com.rodrigo.cleanarchitecturedemo.domain.models.Product;
 

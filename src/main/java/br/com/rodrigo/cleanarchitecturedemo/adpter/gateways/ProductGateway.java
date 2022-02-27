@@ -3,7 +3,7 @@ package br.com.rodrigo.cleanarchitecturedemo.adpter.gateways;
 import br.com.rodrigo.cleanarchitecturedemo.adpter.jpa.repositories.ProductRepository;
 import br.com.rodrigo.cleanarchitecturedemo.adpter.mappers.ProductMapper;
 import br.com.rodrigo.cleanarchitecturedemo.domain.models.Product;
-import br.com.rodrigo.cleanarchitecturedemo.domain.userCases.Ports.ProductPort;
+import br.com.rodrigo.cleanarchitecturedemo.domain.usercases.ports.ProductPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

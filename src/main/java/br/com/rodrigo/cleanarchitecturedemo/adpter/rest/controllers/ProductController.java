@@ -3,7 +3,7 @@ package br.com.rodrigo.cleanarchitecturedemo.adpter.rest.controllers;
 import br.com.rodrigo.cleanarchitecturedemo.adpter.rest.dtos.ProductResponseDTO;
 import br.com.rodrigo.cleanarchitecturedemo.adpter.mappers.ProductMapper;
 import br.com.rodrigo.cleanarchitecturedemo.adpter.rest.dtos.ProductDTO;
-import br.com.rodrigo.cleanarchitecturedemo.domain.userCases.interfaces.IProductUseCase;
+import br.com.rodrigo.cleanarchitecturedemo.domain.usercases.IProductUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
