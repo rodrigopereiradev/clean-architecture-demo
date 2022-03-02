@@ -8,7 +8,7 @@ public interface BrandPort {
 
     void save(Brand brand);
 
-    Brand update(Brand brand);
+    void update(Brand brand);
 
     Brand findById(Long id);
 
