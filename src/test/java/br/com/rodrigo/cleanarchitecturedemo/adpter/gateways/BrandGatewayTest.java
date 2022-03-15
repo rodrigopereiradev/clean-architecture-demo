@@ -101,7 +101,6 @@ class BrandGatewayTest {
 
     @Test
     void shouldThrowExceptionWhenBrandNotFound() {
-        var brandEntity = BrandEntity.builder().id(1L).build();
         when(repository.findById(1L)).thenReturn(Optional.empty());
 
         assertThrows(EntityNotFoundException.class, () -> gateway.findById(1L));
@@ -117,7 +116,5 @@ class BrandGatewayTest {
 
         assertFalse(brands.isEmpty());
     }
-
-
 
 }

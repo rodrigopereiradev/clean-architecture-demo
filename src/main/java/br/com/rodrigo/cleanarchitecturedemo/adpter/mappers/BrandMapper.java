@@ -2,7 +2,9 @@ package br.com.rodrigo.cleanarchitecturedemo.adpter.mappers;
 
 import br.com.rodrigo.cleanarchitecturedemo.adpter.jpa.entities.BrandEntity;
 import br.com.rodrigo.cleanarchitecturedemo.domain.models.Brand;
+import org.springframework.stereotype.Component;
 
+@Component
 public class BrandMapper {
 
     public BrandEntity toEntity(Brand brand) {
