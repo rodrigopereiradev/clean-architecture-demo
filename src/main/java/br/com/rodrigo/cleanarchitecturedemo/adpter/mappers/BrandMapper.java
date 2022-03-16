@@ -1,6 +1,7 @@
 package br.com.rodrigo.cleanarchitecturedemo.adpter.mappers;
 
 import br.com.rodrigo.cleanarchitecturedemo.adpter.jpa.entities.BrandEntity;
+import br.com.rodrigo.cleanarchitecturedemo.adpter.rest.dtos.BrandDTO;
 import br.com.rodrigo.cleanarchitecturedemo.domain.models.Brand;
 import org.springframework.stereotype.Component;
 
@@ -29,6 +30,17 @@ public class BrandMapper {
                 .isActive(brandEntity.getIsActive())
                 .createdIn(brandEntity.getCreatedIn())
                 .updatedIn(brandEntity.getUpdatedIn())
+                .build();
+    }
+
+    public Brand fromDTO(BrandDTO brandDTO) {
+        return Brand.builder()
+                .id(brandDTO.getId())
+                .fantasyName(brandDTO.getFantasyName())
+                .corporateName(brandDTO.getCorporateName())
+                .isActive(brandDTO.getIsActive())
+                .createdIn(brandDTO.getCreatedIn())
+                .updatedIn(brandDTO.getUpdatedIn())
                 .build();
     }
 }

@@ -3,6 +3,8 @@ package br.com.rodrigo.cleanarchitecturedemo.adpter.jpa.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serial;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -13,7 +15,10 @@ import java.time.LocalDateTime;
 @ToString
 @Entity
 @Table(name = "TB_PRODUCT")
-public class ProductEntity {
+public class ProductEntity implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 722149011108207672L;
 
     @Id
     @Column(name = "ID")
