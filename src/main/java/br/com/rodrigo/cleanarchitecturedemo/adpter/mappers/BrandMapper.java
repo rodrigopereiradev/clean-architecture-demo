@@ -38,9 +38,6 @@ public class BrandMapper {
                 .id(brandDTO.getId())
                 .fantasyName(brandDTO.getFantasyName())
                 .corporateName(brandDTO.getCorporateName())
-                .isActive(brandDTO.getIsActive())
-                .createdIn(brandDTO.getCreatedIn())
-                .updatedIn(brandDTO.getUpdatedIn())
                 .build();
     }
 }

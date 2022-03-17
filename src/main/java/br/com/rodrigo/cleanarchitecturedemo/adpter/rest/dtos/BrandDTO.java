@@ -2,7 +2,7 @@ package br.com.rodrigo.cleanarchitecturedemo.adpter.rest.dtos;
 
 import lombok.*;
 
-import java.time.LocalDateTime;
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
@@ -12,10 +12,11 @@ import java.time.LocalDateTime;
 public class BrandDTO {
 
     private Long id;
+
+    @NotBlank(message = "Fantasy name is mandatory.")
     private String fantasyName;
+
+    @NotBlank(message = "Corporate name is mandatory.")
     private String corporateName;
-    private Boolean isActive;
-    private LocalDateTime createdIn;
-    private LocalDateTime updatedIn;
 
 }

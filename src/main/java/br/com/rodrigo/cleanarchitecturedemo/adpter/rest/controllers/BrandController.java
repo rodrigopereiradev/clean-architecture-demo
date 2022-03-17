@@ -6,6 +6,7 @@ import br.com.rodrigo.cleanarchitecturedemo.domain.usercases.IBrandUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,7 @@ public class BrandController {
     private final BrandMapper mapper;
 
     @PostMapping
-    public ResponseEntity<Void> create(@RequestBody BrandDTO brandDTO) {
+    public ResponseEntity<Void> create(@Validated @RequestBody BrandDTO brandDTO) {
         var brand = mapper.fromDTO(brandDTO);
         useCase.create(brand);
         return ResponseEntity.status(HttpStatus.CREATED).build();
