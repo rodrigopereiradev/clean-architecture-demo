@@ -36,7 +36,7 @@ public class BrandEntity implements Serializable {
     @Column(name = "ACTIVE")
     private Boolean isActive;
 
-    @Column(name = "CREATE_DATE")
+    @Column(name = "CREATION_DATE")
     private LocalDateTime createdIn;
 
     @Column(name = "UPDATE_DATE")

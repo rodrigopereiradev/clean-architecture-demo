@@ -40,4 +40,15 @@ public class BrandMapper {
                 .corporateName(brandDTO.getCorporateName())
                 .build();
     }
+
+    public BrandDTO toDto(Brand brand) {
+        return BrandDTO.builder()
+                .id(brand.getId())
+                .fantasyName(brand.getFantasyName())
+                .corporateName(brand.getCorporateName())
+                .isActive(brand.getIsActive())
+                .createdIn(brand.getCreatedIn())
+                .updatedIn(brand.getUpdatedIn())
+                .build();
+    }
 }

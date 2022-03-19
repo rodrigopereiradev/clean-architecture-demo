@@ -41,11 +41,7 @@ public class ProductController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<ProductResponseDTO> findOneById(@PathVariable Long id) {
-        if (Objects.isNull(id))
-            throw new IllegalArgumentException("The product id is mandatory.");
-
         var product = productUseCase.findById(id);
-
         return ResponseEntity.ok(productMapper.fromProductToDTO(product));
     }
 
