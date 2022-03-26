@@ -38,7 +38,7 @@ class ProductControllerTest {
     }
 
     @Test
-    void shouldReturnStatusOkAndWithFieldsFilledWhenGettingTheProductById() {
+    void shouldReturnStatusOkWithFilledFieldsWhenGettingTheProductById() {
         given().
                 get("/50").
                 then()
@@ -77,8 +77,7 @@ class ProductControllerTest {
 
     @Test
     void shouldReturnBadRequestWithMessageWhenCreatingProductWithEmptyName() {
-        var product = getProductDTO();
-        product.setName("");
+        var product = ProductDTO.builder().name("").build();
         given().body(product)
                 .contentType("application/json")
                 .post()

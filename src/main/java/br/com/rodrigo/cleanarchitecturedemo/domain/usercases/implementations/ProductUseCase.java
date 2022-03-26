@@ -17,8 +17,7 @@ public class ProductUseCase implements IProductUseCase {
 
     @Override
     public void create(Product product) {
-        product.setCreatedIn(LocalDateTime.now());
-        product.setIsActive(Boolean.FALSE);
+        product.setInformationsAtCreation();
         port.save(product);
     }
 
@@ -42,16 +41,14 @@ public class ProductUseCase implements IProductUseCase {
     @Override
     public void activate(Long id) {
         var product = findById(id);
-        product.setIsActive(Boolean.TRUE);
-        product.setUpdatedIn(LocalDateTime.now());
+        product.activate();
         port.save(product);
     }
 
     @Override
     public void inactivate(Long id) {
         var product = findById(id);
-        product.setIsActive(Boolean.FALSE);
-        product.setUpdatedIn(LocalDateTime.now());
+        product.inactive();
         port.save(product);
     }
 
@@ -64,7 +61,6 @@ public class ProductUseCase implements IProductUseCase {
     public void increases(Long id, Integer quantityAdditional) {
         var product = findById(id);
         product.increasesQuantity(quantityAdditional);
-        product.setUpdatedIn(LocalDateTime.now());
         port.save(product);
     }
 
@@ -72,7 +68,6 @@ public class ProductUseCase implements IProductUseCase {
     public void decreases(Long id, Integer quantityDecreased) {
         var product = findById(id);
         product.decreasesQuantity(quantityDecreased);
-        product.setUpdatedIn(LocalDateTime.now());
         port.save(product);
     }
 }

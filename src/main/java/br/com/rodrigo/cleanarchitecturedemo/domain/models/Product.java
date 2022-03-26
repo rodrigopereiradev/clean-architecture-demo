@@ -24,12 +24,29 @@ public class Product {
     @Setter
     private LocalDateTime updatedIn;
 
+    public void setInformationsAtCreation() {
+        this.isActive = Boolean.FALSE;
+        this.createdIn = LocalDateTime.now();
+    }
+
+    public void activate() {
+        this.isActive = Boolean.TRUE;
+        this.updatedIn = LocalDateTime.now();
+    }
+
+    public void inactive() {
+        this.isActive = Boolean.FALSE;
+        this.updatedIn = LocalDateTime.now();
+    }
+
     public void increasesQuantity(Integer quantityAdditional) {
         this.quantity += quantityAdditional;
+        this.updatedIn = LocalDateTime.now();
     }
 
     public void decreasesQuantity(Integer quantityDecreased) {
         this.quantity -= quantityDecreased;
+        this.updatedIn = LocalDateTime.now();
     }
 
     public void updateProperties(Product product) {
