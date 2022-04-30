@@ -17,11 +17,8 @@ public class Product {
     private String brand;
     private Integer quantity;
     private BigDecimal value;
-    @Setter
     private Boolean isActive;
-    @Setter
     private LocalDateTime createdIn;
-    @Setter
     private LocalDateTime updatedIn;
 
     public void setInformationsAtCreation() {
@@ -34,7 +31,7 @@ public class Product {
         this.updatedIn = LocalDateTime.now();
     }
 
-    public void inactive() {
+    public void inactivate() {
         this.isActive = Boolean.FALSE;
         this.updatedIn = LocalDateTime.now();
     }

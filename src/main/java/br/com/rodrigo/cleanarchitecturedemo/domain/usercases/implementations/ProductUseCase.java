@@ -6,7 +6,6 @@ import br.com.rodrigo.cleanarchitecturedemo.domain.usercases.IProductUseCase;
 import br.com.rodrigo.cleanarchitecturedemo.domain.usercases.ports.ProductPort;
 import lombok.RequiredArgsConstructor;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -48,7 +47,7 @@ public class ProductUseCase implements IProductUseCase {
     @Override
     public void inactivate(Long id) {
         var product = findById(id);
-        product.inactive();
+        product.inactivate();
         port.save(product);
     }
 

@@ -52,7 +52,6 @@ public class ProductController {
         return ResponseEntity.ok().build();
     }
 
-
     @PatchMapping(value = "/{id}/activate")
     public ResponseEntity<Void> activate(@PathVariable Long id) {
         productUseCase.activate(id);
