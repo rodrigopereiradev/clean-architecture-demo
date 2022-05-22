@@ -45,7 +45,7 @@ class ProductControllerTest {
                 .statusCode(HttpStatus.OK.value())
                 .body("name", equalTo("Controle Xbox 360"))
                 .body("description", equalTo("Cor branca."))
-                .body("brand", equalTo("Microsoft"))
+                .body("brand", notNullValue())
                 .body("quantity", equalTo(20))
                 .body("value", equalTo(99.99F))
                 .body("isActive", equalTo(Boolean.TRUE))
@@ -90,27 +90,14 @@ class ProductControllerTest {
     @Test
     void shouldReturnBadRequestWithMessageWhenCreatingProductWithNullBrand() {
         var product = getProductDTO();
-        product.setBrand(null);
+        product.setIdBrand(null);
         given().body(product)
                 .contentType("application/json")
                 .post()
                 .then()
                 .statusCode(HttpStatus.BAD_REQUEST.value())
-                .body("descriptions", hasItem("The product's brand is mandatory."));
+                .body("descriptions", hasItem("The product's brand id is mandatory."));
 
-    }
-
-    @Test
-    void shouldReturnBadRequestWithMessageWhenCreatingProductWithEmptyBrand() {
-        var product = getProductDTO();
-        product.setBrand("");
-
-        given().body(product).
-                contentType("application/json")
-                .post()
-                .then()
-                .statusCode(HttpStatus.BAD_REQUEST.value())
-                .body("descriptions", hasItem("The product's brand is mandatory."));
     }
 
     @Test
@@ -228,7 +215,7 @@ class ProductControllerTest {
         return ProductDTO.builder()
                 .name("Test")
                 .description("Test")
-                .brand("Test")
+                .idBrand(50L)
                 .quantity(100)
                 .value(new BigDecimal("400.90"))
                 .build();

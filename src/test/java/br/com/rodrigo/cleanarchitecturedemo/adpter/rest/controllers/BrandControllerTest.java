@@ -11,7 +11,8 @@ import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class BrandControllerTest {
+class
+BrandControllerTest {
 
     @LocalServerPort
     private int localServerPort;

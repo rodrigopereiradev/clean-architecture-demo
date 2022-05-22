@@ -14,7 +14,7 @@ public class Product {
     private Long id;
     private String name;
     private String description;
-    private String brand;
+    private Brand brand;
     private Integer quantity;
     private BigDecimal value;
     private Boolean isActive;

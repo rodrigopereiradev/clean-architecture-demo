@@ -1,20 +1,27 @@
 package br.com.rodrigo.cleanarchitecturedemo.adpter.mappers;
 
+import br.com.rodrigo.cleanarchitecturedemo.adpter.jpa.entities.BrandEntity;
+import br.com.rodrigo.cleanarchitecturedemo.adpter.rest.dtos.BrandResponseDTO;
 import br.com.rodrigo.cleanarchitecturedemo.adpter.rest.dtos.ProductDTO;
 import br.com.rodrigo.cleanarchitecturedemo.adpter.rest.dtos.ProductResponseDTO;
 import br.com.rodrigo.cleanarchitecturedemo.adpter.jpa.entities.ProductEntity;
+import br.com.rodrigo.cleanarchitecturedemo.domain.models.Brand;
 import br.com.rodrigo.cleanarchitecturedemo.domain.models.Product;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class ProductMapper {
+
+    private final BrandMapper brandMapper;
 
     public ProductEntity toEntity(Product product) {
         return ProductEntity.builder()
                 .id(product.getId())
                 .name(product.getName())
                 .description(product.getDescription())
-                .brand(product.getBrand())
+                .brand(brandMapper.toEntity(product.getBrand()))
                 .quantity(product.getQuantity())
                 .value(product.getValue())
                 .isActive(product.getIsActive())
@@ -27,7 +34,9 @@ public class ProductMapper {
         return Product.builder()
                 .name(productDTO.getName())
                 .description(productDTO.getDescription())
-                .brand(productDTO.getBrand())
+                .brand(Brand.builder()
+                        .id(productDTO.getIdBrand())
+                        .build())
                 .quantity(productDTO.getQuantity())
                 .value(productDTO.getValue())
                 .build();
@@ -38,7 +47,7 @@ public class ProductMapper {
                 .id(productEntity.getId())
                 .name(productEntity.getName())
                 .description(productEntity.getDescription())
-                .brand(productEntity.getBrand())
+                .brand(brandMapper.fromEntity(productEntity.getBrand()))
                 .quantity(productEntity.getQuantity())
                 .value(productEntity.getValue())
                 .isActive(productEntity.getIsActive())
@@ -52,7 +61,11 @@ public class ProductMapper {
                 .id(product.getId())
                 .name(product.getName())
                 .description(product.getDescription())
-                .brand(product.getBrand())
+                .brand(BrandResponseDTO.builder()
+                        .id(product.getBrand().getId())
+                        .corporateName(product.getBrand().getCorporateName())
+                        .fantasyName(product.getBrand().getFantasyName())
+                        .build())
                 .quantity(product.getQuantity())
                 .value(product.getValue())
                 .isActive(product.getIsActive())

@@ -1,5 +1,6 @@
 package br.com.rodrigo.cleanarchitecturedemo.adpter.jpa.entities;
 
+import br.com.rodrigo.cleanarchitecturedemo.domain.models.Brand;
 import lombok.*;
 
 import javax.persistence.*;
@@ -31,8 +32,9 @@ public class ProductEntity implements Serializable {
     @Column(name = "DESCRIPTION")
     private String description;
 
-    @Column(name = "BRAND")
-    private String brand;
+    @OneToOne
+    @JoinColumn(name = "ID_BRAND")
+    private BrandEntity brand;
 
     @Column(name = "QUANTITY")
     private Integer quantity;
