@@ -48,4 +48,5 @@ public class BrandGateway implements BrandPort {
 
         return brandsEntity.stream().map(mapper::fromEntity).collect(Collectors.toList());
     }
+
 }

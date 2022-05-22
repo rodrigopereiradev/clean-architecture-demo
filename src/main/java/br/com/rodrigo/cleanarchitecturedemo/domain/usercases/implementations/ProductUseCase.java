@@ -2,6 +2,7 @@ package br.com.rodrigo.cleanarchitecturedemo.domain.usercases.implementations;
 
 import br.com.rodrigo.cleanarchitecturedemo.domain.exceptions.ProductException;
 import br.com.rodrigo.cleanarchitecturedemo.domain.models.Product;
+import br.com.rodrigo.cleanarchitecturedemo.domain.usercases.IBrandUseCase;
 import br.com.rodrigo.cleanarchitecturedemo.domain.usercases.IProductUseCase;
 import br.com.rodrigo.cleanarchitecturedemo.domain.usercases.ports.ProductPort;
 import lombok.RequiredArgsConstructor;
@@ -13,18 +14,25 @@ import java.util.Objects;
 public class ProductUseCase implements IProductUseCase {
 
     private final ProductPort port;
+    private final IBrandUseCase brandUseCase;
 
     @Override
     public void create(Product product) {
-        product.setInformationsAtCreation();
+        var brand = brandUseCase.findById(product.getBrand().getId());
+
+        product.configureProductOnCreation(brand);
         port.save(product);
+
     }
 
     @Override
     public void update(Product product) {
         var productExistent = findById(product.getId());
-        productExistent.updateProperties(product);
+        var brand = brandUseCase.findById(product.getBrand().getId());
+
+        productExistent.updateProperties(product, brand);
         port.save(productExistent);
+
     }
 
     @Override

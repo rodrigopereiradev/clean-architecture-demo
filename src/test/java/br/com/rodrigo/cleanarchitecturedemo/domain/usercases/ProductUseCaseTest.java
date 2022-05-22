@@ -1,7 +1,10 @@
 package br.com.rodrigo.cleanarchitecturedemo.domain.usercases;
 
+import br.com.rodrigo.cleanarchitecturedemo.domain.exceptions.BrandException;
 import br.com.rodrigo.cleanarchitecturedemo.domain.exceptions.ProductException;
+import br.com.rodrigo.cleanarchitecturedemo.domain.models.Brand;
 import br.com.rodrigo.cleanarchitecturedemo.domain.models.Product;
+import br.com.rodrigo.cleanarchitecturedemo.domain.usercases.implementations.BrandUseCase;
 import br.com.rodrigo.cleanarchitecturedemo.domain.usercases.implementations.ProductUseCase;
 import br.com.rodrigo.cleanarchitecturedemo.domain.usercases.ports.ProductPort;
 import org.junit.jupiter.api.Test;
@@ -23,35 +26,47 @@ class ProductUseCaseTest {
     @Mock
     private ProductPort port;
 
+    @Mock
+    private BrandUseCase brandUseCase;
+
     @InjectMocks
     private ProductUseCase useCase;
 
     @Test
     void shouldCallSaveMethodFromPortWhenCreatingProduct() {
-        var product = Product.builder().build();
+        var brand = Brand.builder().id(1L).build();
+        var product = Product.builder().brand(brand).build();
+
+        when(brandUseCase.findById(brand.getId())).thenReturn(brand);
         useCase.create(product);
         verify(port).save(product);
     }
 
     @Test
     void shouldSetCreationDateOnProductWhenItIsCreated() {
-        var product = Product.builder().build();
+        Brand brand = Brand.builder().id(1L).build();
+        var product = Product.builder().brand(brand).build();
+        when(brandUseCase.findById(product.getBrand().getId())).thenReturn(brand);
         useCase.create(product);
         assertNotNull(product.getCreatedIn());
     }
 
     @Test
     void shouldCallSaveMethodFromPortWhenUpdatingProduct() {
-        var product = Product.builder().id(1L).build();
+        var brand = Brand.builder().id(1L).build();
+        var product = Product.builder().id(1L).brand(brand).build();
         when(port.findById(1L)).thenReturn(product);
+        when(brandUseCase.findById(product.getBrand().getId())).thenReturn(brand);
         useCase.update(product);
         verify(port).save(product);
     }
 
     @Test
     void shouldSetUpdateDateOnProductWhenUpdatingProduct() {
-        var product = Product.builder().id(1L).build();
+        var brand = Brand.builder().id(1L).build();
+        var product = Product.builder().id(1L).brand(brand).build();
         when(port.findById(1L)).thenReturn(product);
+        when(brandUseCase.findById(product.getBrand().getId())).thenReturn(brand);
         useCase.update(product);
         assertNotNull(product.getUpdatedIn());
     }

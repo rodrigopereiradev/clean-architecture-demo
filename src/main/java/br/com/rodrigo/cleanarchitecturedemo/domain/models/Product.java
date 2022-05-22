@@ -21,7 +21,8 @@ public class Product {
     private LocalDateTime createdIn;
     private LocalDateTime updatedIn;
 
-    public void setInformationsAtCreation() {
+    public void configureProductOnCreation(Brand brand) {
+        this.brand = brand;
         this.isActive = Boolean.FALSE;
         this.createdIn = LocalDateTime.now();
     }
@@ -46,10 +47,10 @@ public class Product {
         this.updatedIn = LocalDateTime.now();
     }
 
-    public void updateProperties(Product product) {
+    public void updateProperties(Product product, Brand brand) {
         this.name = product.getName();
         this.description = product.getDescription();
-        this.brand = product.getBrand();
+        this.brand = brand;
         this.quantity = product.getQuantity();
         this.value = product.getValue();
         this.updatedIn = LocalDateTime.now();
